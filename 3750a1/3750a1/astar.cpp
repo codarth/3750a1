@@ -61,7 +61,7 @@ void AStar::findPath() {
 			float x = currentNode->getX() + 1;
 			float y = currentNode->getY();
 			if (x < mapW && y < mapH && x >= 0 && y >= 0) {
-				for (int i = 0; i < m_grid.size(); i++) {
+				for (unsigned int i = 0; i < m_grid.size(); i++) {
 					if (x == m_grid[i]->getX() && y == m_grid[i]->getY()) {
 						newNode = m_grid[i];
 						break;
@@ -74,7 +74,7 @@ void AStar::findPath() {
 			x = currentNode->getX() - 1;
 			y = currentNode->getY();
 			if (x < mapW && y < mapH && x >= 0 && y >= 0) {
-				for (int i = 0; i < m_grid.size(); i++) {
+				for (unsigned int i = 0; i < m_grid.size(); i++) {
 					if (x == m_grid[i]->getX() && y == m_grid[i]->getY()) {
 						newNode = m_grid[i];
 						break;
@@ -87,7 +87,7 @@ void AStar::findPath() {
 			x = currentNode->getX();
 			y = currentNode->getY() - 1;
 			if (x < mapW && y < mapH && x >= 0 && y >= 0) {
-				for (int i = 0; i < m_grid.size(); i++) {
+				for (unsigned int i = 0; i < m_grid.size(); i++) {
 					if (x == m_grid[i]->getX() && y == m_grid[i]->getY()) {
 						newNode = m_grid[i];
 						break;
@@ -100,7 +100,7 @@ void AStar::findPath() {
 			x = currentNode->getX();
 			y = currentNode->getY() + 1;
 			if (x < mapW && y < mapH && x >= 0 && y >= 0) {
-				for (int i = 0; i < m_grid.size(); i++) {
+				for (unsigned int i = 0; i < m_grid.size(); i++) {
 					if (x == m_grid[i]->getX() && y == m_grid[i]->getY()) {
 						newNode = m_grid[i];
 						break;
@@ -113,7 +113,7 @@ void AStar::findPath() {
 			x = currentNode->getX() + 1;
 			y = currentNode->getY() - 1;
 			if (x < mapW && y < mapH && x >= 0 && y >= 0) {
-				for (int i = 0; i < m_grid.size(); i++) {
+				for (unsigned int i = 0; i < m_grid.size(); i++) {
 					if (x == m_grid[i]->getX() && y == m_grid[i]->getY()) {
 						newNode = m_grid[i];
 						break;
@@ -126,7 +126,7 @@ void AStar::findPath() {
 			x = currentNode->getX() - 1;
 			y = currentNode->getY() - 1;
 			if (x < mapW && y < mapH && x >= 0 && y >= 0) {
-				for (int i = 0; i < m_grid.size(); i++) {
+				for (unsigned int i = 0; i < m_grid.size(); i++) {
 					if (x == m_grid[i]->getX() && y == m_grid[i]->getY()) {
 						newNode = m_grid[i];
 						break;
@@ -139,7 +139,7 @@ void AStar::findPath() {
 			x = currentNode->getX() + 1;
 			y = currentNode->getY() + 1;
 			if (x < mapW && y < mapH && x >= 0 && y >= 0) {
-				for (int i = 0; i < m_grid.size(); i++) {
+				for (unsigned int i = 0; i < m_grid.size(); i++) {
 					if (x == m_grid[i]->getX() && y == m_grid[i]->getY()) {
 						newNode = m_grid[i];
 						break;
@@ -152,7 +152,7 @@ void AStar::findPath() {
 			x = currentNode->getX() + 1;
 			y = currentNode->getY() - 1;
 			if (x < mapW && y < mapH && x >= 0 && y >= 0) {
-				for (int i = 0; i < m_grid.size(); i++) {
+				for (unsigned int i = 0; i < m_grid.size(); i++) {
 					if (x == m_grid[i]->getX() && y == m_grid[i]->getY()) {
 						newNode = m_grid[i];
 						break;
@@ -163,7 +163,7 @@ void AStar::findPath() {
 			}
 
 
-			for (int i = 0; i < m_openList.size(); i++) {
+			for (unsigned int i = 0; i < m_openList.size(); i++) {
 				if (currentNode == m_openList[i]) {
 					m_openList.erase(m_openList.begin() + i);
 				}
@@ -174,9 +174,9 @@ void AStar::findPath() {
 
 // Establish Coordinates
 void AStar::buildlevel() {
-	for (int y = 0; y < mapH; y++) {
+	for (unsigned int y = 0; y < mapH; y++) {
 		std::cout << std::endl;
-		for (int x = 0; x < mapW; x++) {
+		for (unsigned int x = 0; x < mapW; x++) {
 			switch (mapArray[y][x]) {
 			case 0:
 				std::cout << ".";
@@ -208,7 +208,7 @@ Node* AStar::getNextNode() {
 	int index = -1;
 	Node* nextNode = NULL;
 
-	for (int i = 0; i < m_openList.size(); i++) {
+	for (unsigned int i = 0; i < m_openList.size(); i++) {
 		if (m_openList[i]->getF() < bestF) {
 			bestF = m_openList[i]->getF();
 			index = i;
@@ -232,7 +232,7 @@ void AStar::addNode(int x, int y, float newCost,
 
 	// I had to use the x, y to compair nodes due to pointer issue (and out of time)
 	Node* addNode = newNode;
-	for (int i = 0; i < m_visitedList.size(); i++) { 
+	for (unsigned int i = 0; i < m_visitedList.size(); i++) { 
 		if (addNode->getX() == m_visitedList[i]->getX()
 			&& addNode->getY() == m_visitedList[i]->getY()) {
 			return;
@@ -243,7 +243,7 @@ void AStar::addNode(int x, int y, float newCost,
 	Node* newChild = new Node(x, y, parent, true);
 	newChild->setG(newCost);
 	newChild->setH(parent->manhattenDist(m_goal));
-	for (int i = 0; i < m_openList.size(); i++) {
+	for (unsigned int i = 0; i < m_openList.size(); i++) {
 		if (addNode->getX() == m_openList[i]->getX() &&
 			addNode->getY() == m_openList[i]->getY()) {
 			float newF = newChild->getG() + newCost + m_openList[i]->getH();

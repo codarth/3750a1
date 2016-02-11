@@ -17,10 +17,11 @@ int main() {
 			" y: " << goalPath[i]->getY() << std::endl;
 	}
 
+	std::cout << "GOAL!\n\n";
 	// To Be Deleted... not needed for linux
-	char a;
-	std::cout << "\n Goal!!\n\npress a key to exit!";
-	std::cin >> a;
+	//char a;
+	//std::cout << "\n Goal!!\n\npress a key to exit!";
+	//std::cin >> a;
 
 	return 0;
 }
